@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profilo </title>
+    <link rel="stylesheet" th:href="@{/css/profilo.css}" type="text/css">
+    <link rel="stylesheet" href="/css/profilo.css">
+</head>
+<body>
+<header>
+    <a class="indietro" th:href="@{/}">
+        <img alt="index" th:src="@{/images/indietro.png}">
+    </a>
+    <h1>Profilo </h1>
+    <form th:action="@{/logout}" th:method="POST">
+        <button type="submit" class="logout-button">Logout</button>
+    </form>
+</header>
+<div class="principale">
+        <h2 th:text="${user.nome + ' ' + user.cognome}"></h2>
+        <p>Email: <span th:text="${user.email}"></span></p>
+
+        <div th:if="${ruolo == 'ARTISTA'}">
+           <p>Voto totale: <span th:text="${user.votoTotale}"></span></p>
+            <h3>Opere pubblicate:</h3>
+            <ul>
+                <li th:each="opera : ${user.opere}" th:text="${opera.titolo}"></li>
+            </ul>
+        </div>
+</div>
+</body>
+</html>

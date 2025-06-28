@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Galleria degli artisti 2025</title>
+    <!-- Collegamento al CSS tramite Thymeleaf e percorso statico -->
+    <link rel="stylesheet" th:href="@{/css/index.css}">
+    <link href="/static/css/index.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- HEADER: Mostra il contenuto in base allo stato di autenticazione -->
+
+
+<header>
+    <!-- Se l'utente NON è autenticato (anonimo) -->
+    <div class="container" sec:authorize="isAnonymous()">
+        <h1>
+            <img src="/images/index.png" alt="Logo" class="logo-img">
+        </h1>
+        <a th:href="@{/login}" class="button login-button">Accedi</a>
+    </div>
+
+    <!-- Se l'utente È autenticato -->
+    <div class="container" sec:authorize="isAuthenticated()">
+		<h1 class="custom-thin-italic">
+		    <img src="/images/index.png" alt="Logo" class="logo-img">
+		</h1>
+        <a th:href="@{/profilo}" class="button login-button">Profilo</a>
+		<!-- Pulsante logout visibile se l'utente è autenticato -->
+		<a th:href="@{/logout}" class="button login-button">Log Out</a>
+    </div>
+</header>
+
+<div class="container">
+    <!-- Sezione pulsanti -->
+    <div class="buttons">
+        <!-- Sempre visibile: Classifica -->
+        <a th:href="@{/classifica}" class="button">Classifica Artisti</a>
+
+        <!-- Solo per ARTISTA: Condividi -->
+        <div sec:authorize="hasAuthority('ARTISTA')">
+            <a th:href="@{/artista/nuovaOpera(username=${#authentication.principal.username})}" class="button">
+                Condividi le tue Opere
+            </a>
+        </div>
+
+        <!-- Solo per autenticati: Vota -->
+        <div sec:authorize="isAuthenticated()">
+            <a th:href="@{/votazione(username=${#authentication.principal.username})}" class="button">
+                Vota le Opere
+            </a>
+        </div>
+    </div>
+	<!-- ✅ Messaggio visibile solo agli anonimi -->
+	    <div class="accesso-invito" sec:authorize="isAnonymous()">
+	        <p>🔓 <strong>Accedi</strong> per usufruire di ulteriori risorse come la votazione e la condivisione delle tue opere!</p>
+	    </div>
+</div>
+
+<!-- Messaggio di benvenuto sotto i pulsanti -->
+<div class="welcome-message" sec:authorize="isAuthenticated()">
+    <h1 class="custom-thin-italic">
+        Benvenuto <span sec:authentication="name"></span>
+    </h1>
+</div>
+
+<!-- MESSAGGIO DI CONFERMA SE UNA NUOVA OPERA È STATA AGGIUNTA -->
+
+<p class="avviso" style="color: rgb(0, 128, 0)"
+   th:if="${operaAggiunta != null}"
+   th:text="${operaAggiunta}">
+</p>
+
+<!-- FOOTER FISSO IN FONDO ALLA PAGINA -->
+
+<footer class="footer">
+    <p>&copy; Galleria degli artisti 2025</p>
+</footer>
+
+</body>
+</html>

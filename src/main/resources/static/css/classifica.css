@@ -1,0 +1,140 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f3f0e4;
+}
+
+.container {
+    margin: 0 auto;
+    padding: 20px;
+    padding-bottom: 80px; /* spazio per il footer fisso */
+}
+
+header {
+    display: flex;
+    justify-content: start;
+    flex-direction: row;
+    align-items: center;
+    background-color: #B8A88D;
+    color: white;
+    text-align: center;
+}
+
+.indietro img {
+    width: 30px;
+    height: auto;
+    margin-right: 20px;
+    cursor: pointer;
+    margin-left: 18px;
+    padding-top: 8px;
+}
+
+main {
+    flex: 1;
+    /* padding-bottom non necessario qui, già su .container */
+}
+
+.immagine-classifica {
+    width: 38px;
+    height: auto;
+    margin-right: 5px;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.item-lista {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+}
+
+.riga-lista {
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+    padding: 0;
+}
+
+.riga-lista p {
+    margin-right: 5px;
+}
+
+.riga-lista:last-child {
+    margin-bottom: 18px;
+}
+
+p {
+    margin: 2px 0;
+    padding: 0;
+}
+
+.ricerca {
+    margin-left: 18px;
+}
+
+.ricerca h2 {
+    color: #333;
+    font-size: 1.5rem;
+    margin-bottom: 12px;
+}
+
+.ricerca input[type="text"] {
+    padding: 10px;
+    border: 1px solid #B8A88D;
+    border-radius: 4px;
+    font-size: 16px;
+    margin-right: 10px;
+    width: 200px;
+    box-sizing: border-box;
+    background-color: #f3f0e4;
+}
+
+.ricerca input[type="submit"] {
+    padding: 10px 15px;
+    background-color: #B8A88D;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-right: 8px;
+}
+
+.ricerca input[type="submit"]:hover {
+    background-color: #9f927a;
+}
+
+.ricerca .reset {
+    padding: 10px 15px;
+    background-color: #f3f0e4;
+    color: #B8A88D;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 16px;
+    border: 1px solid #B8A88D;
+    cursor: pointer;
+}
+
+.ricerca .reset:hover {
+    background-color: #9f927a;
+}
+
+.footer {
+    background-color: #B8A88D;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.footer p {
+    margin: 0;
+    font-size: 14px;
+}

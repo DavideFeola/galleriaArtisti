@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Classifica Artisti</title>
+    <link rel="stylesheet" th:href="@{css/classifica.css}">
+    <link href="/static/css/classifica.css" rel="stylesheet">
+</head>
+<body>
+<header>
+    <a class="indietro" th:href="@{/}">
+        <img alt="index" th:src="@{/images/indietro.png}">
+    </a>
+    <div class="container">
+        <h1>Classifica Artisti</h1>
+    </div>
+</header>
+<main>
+    <div class="ricerca">
+        <h2>Ricerca Artisti</h2>
+        <form th:action="@{/classifica}" th:method="GET">
+            <input name="cognome" placeholder="Inserisci Cognome" required th:value="${cognome}" type="text">
+            <input type="submit" value="Cerca">
+            <a class="reset"
+               th:href="@{/classifica}">Reset</a>
+        </form>
+    </div>
+    <p class="avviso-bad" th:if="${errore != null}" th:text="${errore}" style="margin: 18px; color: red"></p>
+    <div class="container">
+        <ul class="artisti-list" th:each="artista, iter : ${artisti}">
+            <li class="item-lista">
+                <div class="riga-lista">
+                    <img th:if="${iter.index+1 == 1}" alt="immagine classifica" class="immagine-classifica" src="/images/primoposto.png">
+                    <p th:if="${iter.index+1 == 1}" th:text="'Primo Posto'" style="font-weight: bold"></p>
+                </div>
+                <div class="riga-lista">
+                    <img th:if="${iter.index+1 == 2}" alt="immagine classifica" class="immagine-classifica" src="/images/secondoposto.png">
+                    <p th:if="${iter.index+1 == 2}" th:text="'Secondo Posto'" style="font-weight: bold"></p>
+                </div>
+                <div class="riga-lista">
+                    <img th:if="${iter.index+1 == 3}" alt="immagine classifica" class="immagine-classifica" src="/images/terzoposto.png">
+                    <p th:if="${iter.index+1 == 3}" th:text="'Terzo Posto'" style="font-weight: bold"></p>
+                </div>
+                    <p th:unless="${iter.index+1 == 1 || iter.index+1 == 2 || iter.index+1 == 3}" th:text="${iter.index+1} + '° posto' "></p>
+                <div class="riga-lista">
+                    <p>Cognome: </p>
+                    <p th:text="${artista.cognome}" style="font-weight: bold">Cognome</p>
+                </div>
+                <div class="riga-lista">
+                    <p>Pennelli Totali:</p>
+                    <p th:text="${artista.votoTotale}" style="font-weight: bold">22</p>
+                </div>
+            </li>
+        </ul>
+    </div>
+</main>
+<footer class="footer">
+   <p>&copy; Galleria degli artisti 2025</p>
+</footer>
+</body>
+</html>

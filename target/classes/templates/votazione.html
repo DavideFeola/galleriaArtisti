@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vota Opera</title>
+    <link rel="stylesheet" th:href="@{css/votazione.css}">
+</head>
+<body>
+<header>
+    <a class="indietro" th:href="@{/}">
+        <img alt="index" th:src="@{/images/indietro.png}">
+    </a>
+    <div class="container">
+        <h1>Vota le opere</h1>
+    </div>
+</header>
+<main>
+    <div class="ricerca">
+        <h2>Ricerca Opera</h2>
+        <form th:action="@{/votazione}" th:method="GET">
+            <input name="titolo" placeholder="Inserisci Titolo" th:value="${titolo}" type="text">
+            <input name="username" required th:value="${username}" type="hidden">
+            <input type="submit" value="Cerca">
+            <a class="reset" th:href="@{/votazione(username=${username})}">Reset</a>
+        </form>
+    </div>
+    <p th:if="${errore != null}" th:text="${errore}" style="margin: 18px; color: red"></p>
+    <p th:if="${stessoUtente != null}" th:text="${stessoUtente}" style="margin: 18px; color: red"></p>
+    <p th:if="${votoPassato != null}" th:text="${votoPassato}" style="margin: 18px; color: red"></p>
+    <p th:if="${votoEliminato != null}" th:text="${votoEliminato}" style="margin: 18px; color: green"></p>
+    <p th:if="${nonVotato != null}" th:text="${nonVotato}" style="margin: 18px; color: red"></p>
+    <p th:if="${votoInviato != null}" th:text="${votoInviato}" style="margin: 18px; color: rgb(0, 128, 0)"></p>
+    <div class="container">
+        <ul class="artisti-list" th:each="opera : ${opere}">
+            <li class="item-lista">
+                <div class="riga-lista">
+                    <p>Titolo Opera: </p>
+					
+					<a th:href="@{'/opera/' + ${opera.id} + '?username=' + ${username}}" th:text="${opera.titolo}">Titolo</a>
+
+                </div>
+                <div class="riga-lista">
+                    <p>Artista: </p>
+                    <p th:text="${opera.artista.cognome}" style="font-weight: bold">Cognome</p>
+                </div>
+                <div class="riga-lista">
+                    <p>Pennelli:</p>
+                    <p th:text="${opera.voto}" style="font-weight: bold">22</p>
+                </div>		
+            </li>
+            <a th:href="@{/votaOpera(username=${username}, operaId=${opera.id})}" th:method="GET">
+                <img class="icona" th:src="@{/images/pennellofinale2.png}" alt="modifica">
+            </a>
+            <a th:href="@{/eliminaVoto(username=${username}, operaId=${opera.id})}" th:method="GET">
+                <img class="icona" th:src="@{/images/remove.png}" alt="rimuovi">
+            </a>
+        </ul>
+    </div>
+</main>
+</body>
+</html>

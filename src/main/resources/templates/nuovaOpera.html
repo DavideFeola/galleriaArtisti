@@ -1,0 +1,48 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nuova Opera</title>
+    <link rel="stylesheet" th:href="@{/css/nuovaOpera.css}" type="text/css">
+    <link rel="stylesheet" href="/static/css/nuovaOpera.css">
+</head>
+<body>
+<header>
+    <a class="indietro" th:href="@{/}">
+        <img alt="index" th:src="@{/images/indietro.png}">
+    </a>
+    <div class="container">
+        <h1>Aggiungi un'Opera</h1>
+    </div>
+</header>
+<main>
+    <div class="principale">
+        <h1>Nuova Opera</h1>
+        <form th:action="@{/artista/operaAggiunta}" th:method="POST" enctype="multipart/form-data">
+            <label>
+                <input name="titolo" placeholder="Titolo" required type="text">
+            </label>
+            <label>
+                <textarea name="descrizione" placeholder="Descrizione" required class="descrizione"></textarea>
+            </label>
+            <label>
+                <textarea name="correnteArtistica" placeholder="corrente artistica" required></textarea>
+            </label>
+            <div class="form-group">
+                <label for="immagine">Scegli immagine</label>
+                <input type="file" id="immagine" name="immagine" accept="image/*" required>
+            </div>
+            <label>
+                <input name="annoCreazione" placeholder="Anno" required type="number" min="1800" max="2025">
+            </label>
+            <label>
+                <input name="artistaId" th:value="${artistaId}" type="hidden">
+            </label>
+            <button type="submit">Condividi</button>
+        </form>
+    </div>
+</main>
+</body>
+</html>
+
+

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <link rel="stylesheet" th:href="@{css/register.css}">
+    <link href="/static/css/register.css" rel="stylesheet">
+</head>
+<body>
+<div class="principale">
+    <h1>Registrati</h1>
+    <form th:action="@{/register}" th:method="POST">
+        <div class="segmented-picker">
+            <input id="artista" name="ruolo"
+                   th:checked="${ruoloSelezionato == T(it.uniroma3.siw.model.Credenziali.Ruolo).ARTISTA}"
+                   th:onclick="'window.location.href=\'/aggiorna?ruolo=ARTISTA\''"
+                   type="radio"
+                   value="ARTISTA">
+            <label class="picker-option" for="artista">Artista</label>
+
+            <input id="utente" name="ruolo"
+                   th:checked="${ruoloSelezionato == T(it.uniroma3.siw.model.Credenziali.Ruolo).UTENTE}"
+                   th:onclick="'window.location.href=\'/aggiorna?ruolo=UTENTE\''"
+                   type="radio"
+                   value="UTENTE">
+            <label class="picker-option" for="utente">Utente</label>
+        </div>
+
+        <input name="username" placeholder="Username" required type="text">
+        <input name="password" placeholder="Password" required type="password">
+
+        <div class="divider"></div>
+
+        <div th:if="${ruoloSelezionato == T(it.uniroma3.siw.model.Credenziali.Ruolo).ARTISTA}">
+            <input name="nome" placeholder="Nome" required type="text">
+            <input name="cognome" placeholder="Cognome" required type="text">
+			<input name="email" placeholder="Email" required type="text">
+        </div>
+
+        <div th:if="${ruoloSelezionato == T(it.uniroma3.siw.model.Credenziali.Ruolo).UTENTE}">
+            <input name="nome" placeholder="Nome" required type="text">
+            <input name="cognome" placeholder="Cognome" required type="text">
+            <input name="email" placeholder="Email" required type="text">
+        </div>
+
+        <button type="submit">Registrati</button>
+    </form>
+
+    <div class="login">
+        Hai già un account? <a th:href="@{/login}">Login</a>
+    </div>
+    <div class="error-message" th:if="${esistente != null}">
+        <p th:text="${esistente}"></p>
+    </div>
+    <div class="error-message" th:if="${error != null}">
+        <p th:text="${error}"></p>
+    </div>
+    <div class="success-message" th:if="${success != null}">
+        <p th:text="${success}"></p>
+    </div>
+</div>
+<footer class="footer">
+	<p>&copy; Galleria degli artisti 2025</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Accesso Negato</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #F3F0E4;
+            text-align: center;
+            padding: 50px;
+        }
+
+        .container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+        }
+
+        h1 {
+            color: #c0392b;
+        }
+
+        p {
+            color: #555;
+            font-size: 18px;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #B8A88D;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+        }
+
+        a:hover {
+            background-color: #9f927a;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Accesso Negato</h1>
+        <p>Non sei autorizzato ad accedere a questa risorsa.<br>
+           Per favore, effettua l'accesso con il tuo account corretto.</p>
+        <a th:href="@{/}">Torna alla home</a>
+    </div>
+</body>
+</html>
+

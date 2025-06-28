@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Opera</title>
+  <link rel="stylesheet" th:href="@{/css/opera.css}">
+  <link href="/static/css/index.css" rel="stylesheet">
+</head>
+<body>
+  <div class="header">
+	<a class="indietro" th:href="@{/votazione(username=${username})}">
+      <img alt="index" th:src="@{/images/indietro.png}">
+    </a>
+  </div>
+  <div th:if="${opera}" class="opera-info">
+    <div class="opera-details">
+      <h1 th:text="${opera.titolo}">Titolo Opera</h1>
+      <div>Anno di creazione: <span th:text="${opera.annoCreazione}">2000</span></div>
+      <div>Descrizione: <span th:text="${opera.descrizione}">Opera del 1900</span></div>
+      <div>Corrente Artistica: <span th:text="${opera.correnteArtistica}">Surrealismo</span></div>
+    </div>
+	<div class="opera-image" th:if="${opera.immagine != null}">
+	  <img th:src="@{${opera.immagine.path}}" alt="Immagine opera">
+	</div>
+  </div>
+</body>
+</html>
+
